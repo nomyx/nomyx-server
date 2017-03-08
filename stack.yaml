@@ -1,0 +1,28 @@
+flags: {}
+packages:
+- '.'
+- location: ../nomyx-core
+  extra-dep: true
+- location: ../nomyx-language
+  extra-dep: true
+- location: ../nomyx-library
+  extra-dep: true
+- location: ../nomyx-web
+  extra-dep: true
+- location: ../nomyx-api
+  extra-dep: true
+- location: ../nomyx-auth
+  extra-dep: true
+- location: ../imprevu
+  extra-dep: true
+- location: ../imprevu-happstack
+  extra-dep: true
+- location: ../shortcut
+  extra-dep: true
+extra-deps:
+- DebugTraceHelpers-0.12
+- time-recurrence-0.9.2
+- NoTrace-0.3.0.1
+- hint-server-1.4.3
+- eprocess-1.7.2
+resolver: lts-7.14

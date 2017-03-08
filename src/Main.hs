@@ -28,10 +28,10 @@ import           Nomyx.Core.Types
 import           Nomyx.Core.Utils
 import           Nomyx.Web.MainPage
 import           Nomyx.Api.Server                    (serveApi, putSwaggerYaml)
-import           Paths_Nomyx                         as PN
-import           Paths_Nomyx_Language                as PNL
-import           Paths_Nomyx_Web                     as PNW
-import           Paths_Nomyx_Library                 as PNLib
+import           Paths_nomyx_server                  as PN
+import           Paths_nomyx_language                as PNL
+import           Paths_nomyx_web                     as PNW
+import           Paths_nomyx_library                 as PNLib
 import           Safe
 import           System.Console.GetOpt
 import           System.Directory                    (canonicalizePath,

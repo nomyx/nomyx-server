@@ -55,14 +55,6 @@ import           Control.Lens
 -- | Entry point of the program.
 main :: IO Bool
 main = do
-   stdoutHandler <- do
-        lh <- streamHandler stdout INFO
-        return $ setFormatter lh (simpleLogFormatter "[$time : $loggername : $prio] $msg")
-   fileHandler <- log4jFileHandler "nomyx-log.xml" DEBUG
-   updateGlobalLogger rootLoggerName removeHandler
-   updateGlobalLogger "Nomyx" (addHandler stdoutHandler)
-   updateGlobalLogger rootLoggerName (addHandler fileHandler)
-   updateGlobalLogger rootLoggerName (setLevel DEBUG)
    args <- getArgs
    (flags, _) <- nomyxOpts args
    if Version `elem` flags then putStrLn $ "Nomyx " ++ showVersion PN.version
@@ -111,6 +103,7 @@ start flags = do
 
 mainLoop :: Settings -> FilePath -> HostName -> Port -> FilePath -> Bool -> IO ()
 mainLoop settings saveDir host port lib isTTY = do
+   startLog $ saveDir </> "nomyx-log.xml"
    serverCommandUsage
    --creating game structures
    multi <- Main.loadMulti settings lib
@@ -271,3 +264,15 @@ debug s = liftIO $ debugM "Nomyx.Main" s
 info s = liftIO $ infoM "Nomyx.Main" s
 warn s = liftIO $ warningM "Nomyx.Main" s
 err s = liftIO $ errorM "Nomyx.Main" s
+   
+
+startLog :: FilePath -> IO ()
+startLog fp = do
+   stdoutHandler <- do
+        lh <- streamHandler stdout INFO
+        return $ setFormatter lh (simpleLogFormatter "[$time : $loggername : $prio] $msg")
+   fileHandler <- log4jFileHandler fp DEBUG
+   updateGlobalLogger rootLoggerName removeHandler
+   updateGlobalLogger "Nomyx" (addHandler stdoutHandler)
+   updateGlobalLogger rootLoggerName (addHandler fileHandler)
+   updateGlobalLogger rootLoggerName (setLevel DEBUG)

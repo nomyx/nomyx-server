@@ -1,0 +1,12 @@
+version: '2'
+services:
+  nomyx:
+    image: cdupont2/nomyx:latest
+    cpu_shares: 100
+    mem_limit: 1024000000
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    command: sh -c "./cleanLocks; stack exec --system-ghc -- Nomyx -v -h www.nomyx.net --noTTY --adminPass=XXX --saveDir=/data/nomyx"
+    volumes: 
+      - /data/nomyx:/data/nomyx

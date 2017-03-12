@@ -271,8 +271,9 @@ startLog fp = do
    stdoutHandler <- do
         lh <- streamHandler stdout INFO
         return $ setFormatter lh (simpleLogFormatter "[$time : $loggername : $prio] $msg")
-   fileHandler <- log4jFileHandler fp DEBUG
+   log4jHandler <- log4jFileHandler fp DEBUG
+   
    updateGlobalLogger rootLoggerName removeHandler
-   updateGlobalLogger "Nomyx" (addHandler stdoutHandler)
-   updateGlobalLogger rootLoggerName (addHandler fileHandler)
+   updateGlobalLogger "Nomyx"        (addHandler stdoutHandler)
+   updateGlobalLogger rootLoggerName (addHandler log4jHandler)
    updateGlobalLogger rootLoggerName (setLevel DEBUG)

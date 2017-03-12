@@ -1,9 +1,9 @@
 #Regular tests
-stack exec Nomyx -- -t
+stack exec nomyx-server -- -t
 TestsRet=$?
 
 #This tests should make Nomyx die hard"
-stack exec Nomyx -- -t -l "Timeout type check"
+stack exec nomyx-server -- -t -l "Timeout type check"
 KillTest=$?
 
 if [ $TestsRet -eq 0 ]; then

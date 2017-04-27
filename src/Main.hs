@@ -146,7 +146,7 @@ loadMulti set libPath = do
 errMsg :: Settings -> ErrorCall -> IO Multi
 errMsg set e = do
   err $ "Error while loading logged events, log file discarded\n" ++ show (e::ErrorCall)
-  return $ defaultMulti set (Library [rAutoActivate] [])
+  return $ defaultMulti set (Library [RuleTemplateInfo rAutoActivate ""] [])
 
 runTests :: Maybe String -> Int -> IO ()
 runTests mTestName delay = do
